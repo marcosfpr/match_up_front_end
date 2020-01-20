@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:,">
+
+    {% block imports %}
+    {% endblock %}
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../static/css/sb-admin.css" rel="stylesheet">
+    <link href="../static/css/my_css/basic.css" rel="stylesheet">
+
+
+</head>
+
+
+<body>
+	<div id="wrapper">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand matchup" href="/">match up</a>
+            </div>
+		</nav>
+		<div id="notfound">
+			<div class="notfound">
+				<h2>Error</h2>
+				<p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
+				<a class="btn-error" href={{url_for('home.home')}}>Back</a>
+			</div>
+		</div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+.navbar-inverse .navbar-nav > li > a {
+    color: #3f3c3c;!important
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    background-color: #9C27B0!important;
+    border-color: #9C27B0!important;
+}
+
+.navbar-inverse {
+    background-color: #9C27B0!important;
+    border-color: #9C27B0!important;
+}
+
+.top-nav>li>a:hover, .top-nav>li>a:focus, .top-nav>.open>a, .top-nav>.open>a:hover, .top-nav>.open>a:focus{
+    background-color: #551160!important;
+}
+
+.navbar-inverse .navbar-toggle{
+    border-color: #9C27B0!important;
+}
+
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus{
+    background-color: #551160!important;
+}
+
+@font-face {
+    font-family: 'arciform_sansregular';
+    src: url('../../fonts/arciform-webfont.woff2') format('woff2'),
+         url('../../fonts/arciform-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.matchup {
+    font-family: 'arciform_sansregular';
+    color: white!important;
+}
+
+.matchup-title {
+    font-family: 'arciform_sansregular';
+    color: #9C27B0!important;
+    font-size: 60;
+}
+
+.top-nav>li>a{
+    color: white!important;
+}
+
+.side-nav {
+    background-color: white!important;
+}
+
+.side-nav li a:hover, .side-nav li a:focus{
+    background-color: #c567d0!important;
+}
+
+body {
+    background: white!important;
+}
+
+.notfound {
+  max-width: 710px;
+  width: 100%;
+  padding-left: 190px;
+  padding-top: 192px;
+  line-height: 1.4;
+}
+
+.btn-inactive{
+    display: none;
+}
+
+.fa-times{
+    color: red!important;
+}

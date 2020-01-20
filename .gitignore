@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.idea/
+
+# Distribution / packaging
+pipfile
+pipfile.lock
