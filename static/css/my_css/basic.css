@@ -40,7 +40,15 @@
 .matchup-title {
     font-family: 'arciform_sansregular';
     color: #9C27B0!important;
-    font-size: 60;
+    font-size: 60px;
+}
+
+.matchup-title-search {
+    font-family: 'arciform_sansregular';
+    color: #9C27B0!important;
+    font-size: 60px;
+    text-align: center;
+    height: 100px;
 }
 
 .top-nav>li>a{

@@ -17,6 +17,9 @@ app.register_blueprint(home_blueprint)
 from app.collection import collection_blueprint
 app.register_blueprint(collection_blueprint)
 
+from app.search import search_blueprint
+app.register_blueprint(search_blueprint)
+
 
 @app.errorhandler(404)
 def page_not_found(error):

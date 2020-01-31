@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        <span>Collection Data</span>
+                        <span>{{collection['name']}}</span>
                         <button class="btn-delete-coll btn btn-danger pull-right" data-url="/collection/{{collection['id']}}">Delete</button>
                     </h1>
                     {% with messages = get_flashed_messages() %}
@@ -47,7 +47,8 @@
                     <div class="col-lg-12">
                         <h2>
                             <span>Archives</span>
-                            <button class="btn btn-info pull-right" data-toggle="modal" data-target="#modal-file">Add file</button>
+                            <button class="btn btn-info pull-right" data-toggle="modal" data-target="#modal-file">Add <span class="fa fa-plus"></span></button>
+                            <button id="btn-process" style="margin-right: 10px" class="btn btn-success pull-right" data-url="/collection/{{collection['id']}}/process">Save <span class="fa fa-save"></span> </button>
                         </h2>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
@@ -159,6 +160,18 @@
                 }
             });
         }
+    });
+
+    $("#btn-process").click(function(e){
+        e.preventDefault();
+        url = $(this).data("url");
+        $.ajax({
+                url: url,
+                type: 'get',
+                success: function(){
+                    location.reload();
+                }
+        });
     });
 
 

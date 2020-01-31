@@ -8,3 +8,9 @@ from security import Token
 @Token.access_token_required
 def home():
     return render_template("index.html")
+
+
+@bp.route("/about-us", methods=['GET'])
+@Token.access_token_required
+def about_us():
+    return render_template("about_us.html")

@@ -2,71 +2,73 @@
 
 {% block imports %}
     <link href="../static/css/my_css/search.css" rel="stylesheet">
-
 {% endblock %}
 
 {% block body %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+         <div class="alert alert-danger" role="alert">
+            {{ message }}
+         </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
 
-    <div id="page-wrapper">
-
-        <div class="container-fluid">
-
-            <!-- Page Heading -->
-            <div class="row">
-                <div class="col-lg-12">
-                    {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        {% for message in messages %}
-                         <div class="alert alert-info" role="alert">
-                            {{ message }}
-                         </div>
+     <form  id="search-form" action="/search" method="get">
+        {% if not macro_collections() %}
+        <div class="alert alert-info" role="alert">
+            You don't have a collection to make queries. Create one <a href="/collection/register">here</a>.
+        </div>
+        {% else %}
+            <center class="optionbox">
+                    <select form="search-form" name="collection" class="form-control">
+                        <option selected="selected" disabled> CHOOSE A COLLECTION </option>
+                         {% for collection in macro_collections() %}
+                            <option value="{{collection.id}}">
+                               {{collection.name}}
+                            </option>
                         {% endfor %}
-                    {% endif %}
-                    {% endwith %}
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="input-group" id="adv-search">
-                                    <input type="text" class="form-control" placeholder="Search for snippets" />
-                                    <div class="input-group-btn">
-                                        <div class="btn-group" role="group">
-                                            <div class="dropdown dropdown-lg">
-                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                                    <form class="form-horizontal" role="form">
-                                                      <div class="form-group">
-                                                        <label for="filter">Filter by</label>
-                                                        <select class="form-control">
-                                                            <option value="0" selected>All Snippets</option>
-                                                            <option value="1">Featured</option>
-                                                            <option value="2">Most popular</option>
-                                                            <option value="3">Top rated</option>
-                                                            <option value="4">Most commented</option>
-                                                        </select>
-                                                      </div>
-                                                      <div class="form-group">
-                                                        <label for="contain">Author</label>
-                                                        <input class="form-control" type="text" />
-                                                      </div>
-                                                      <div class="form-group">
-                                                        <label for="contain">Contains the words</label>
-                                                        <input class="form-control" type="text" />
-                                                      </div>
-                                                      <button type="submit" class="btn btn-primary"><span class="fa fa-search" aria-hidden="true"></span></button>
-                                                    </form>
+                    </select>
+            </center>
+        {% endif %}
+        <div id="page-wrapper-search">
+            <div class="matchup-title-search">match up
+            </div>
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group" id="adv-search">
+                                        <center class="center-text-search">
+                                            <input name="keywords" type="text" class="form-control input-text-search" placeholder="Search for snippets" />
+                                            <div class="input-group-btn">
+                                                <div class="form-group" role="group">
+                                                    <button type="submit" value="" class="btn btn-primary"><span class='fa fa-search'></span></button>
                                                 </div>
                                             </div>
-                                            <button type="button" class="btn btn-primary"><span class="fa fa-search" aria-hidden="true"></span></button>
-                                        </div>
+                                        </center>
                                     </div>
                                 </div>
-                              </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+         <center style="margin-top: 100px;"><p style="color: #9C27B0;">Would you like to configure your search engine?</p></center>
+         <center><a href="/advanced">Click here</a></center>
+     </form>
+
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript">
+    $('input').on("input", function(e) {
+        $(this).val($(this).val().replace("/", ""));
+    });
+</script>
 {% endblock %}

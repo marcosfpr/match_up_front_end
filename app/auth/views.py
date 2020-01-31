@@ -71,3 +71,20 @@ def register():
                                email=request_data['email']), 401
 
     return redirect(url_for('auth.login')), 200
+
+
+@bp.route("/logout", methods=['GET'])
+@Token.access_token_required
+def logout():
+
+    try:
+        response = requests.post(BASE_API_URL+"/logout", headers=Token.get_header_access())
+    except requests.exceptions.RequestException:
+        return render_template("error.html")
+
+    if 'success' not in response.json():
+        return render_template("error.html")
+
+    Token.access_token = None
+    Token.refresh_token = None
+    return redirect(url_for("auth.login"))

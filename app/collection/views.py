@@ -141,3 +141,21 @@ def register_collection():
         flash(json['success'])
 
     return redirect(url_for('home.home'))
+
+
+@bp.route("/collection/<int:collection_id>/process", methods=['GET'])
+def process_collection(collection_id):
+    try:
+        response = requests.get(BASE_API_URL+f"/collection/{collection_id}/process",
+                                headers=Token.get_header_access())
+    except requests.exceptions.RequestException:
+        flash("Unexpected error")
+        return render_template("error.html")
+
+    json = response.json()
+    if 'error' in json:
+        flash(json['error'])
+    if 'success' in json:
+        flash(json['success'])
+
+    return "collection processed"
