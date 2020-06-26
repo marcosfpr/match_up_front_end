@@ -21,14 +21,14 @@
     {% endif %}
     {% endwith %}
 
-     <form id="search-form" action="/search" method="get">
+     <form enctype="multipart/form-data" role="form" id="search-form-file" action="/search/file" method="post">
         {% if not macro_collections() %}
         <div class="alert alert-info" role="alert">
             You don't have a collection to make queries. Create one <a href="/collection/register">here</a>.
         </div>
         {% else %}
             <center class="optionbox">
-                    <select form="search-form" name="collection" class="form-control">
+                    <select form="search-form-file" name="collection" class="form-control">
                         {% if collection_id==null %}
                         <option selected="selected" disabled> CHOOSE A COLLECTION </option>
                         {% endif %}
@@ -58,13 +58,8 @@
                                 <div class="col-md-12">
                                     <div class="input-group" id="adv-search">
                                         <center class="center-text-search">
-                                            <input name="keywords" type="text" value="{{keywords}}" class="form-control input-text-search" placeholder="Search for snippets" />
-                                            <div class="input-group-btn">
-                                                <div class="form-group" role="group">
-                                                    <button type="submit" value="" class="btn btn-primary"><span class='fa fa-search'></span></button>
-                                                </div>
-                                            </div>
-                                            Or search with a file <a href="/search/file">here</a>
+                                             Select a file: <input form="search-form-file" type="file" name="file"><br><br>
+                                            <input type="submit" value="Search" class="btn btn-primary">
                                         </center>
                                     </div>
                                 </div>
@@ -75,7 +70,7 @@
             </div>
         </div>
          <center style="margin-top: 100px;"><p style="color: #9C27B0;">Would you like to configure your search engine?</p></center>
-         <center><a href="/advanced">Click here</a></center>
+         <center><a href="/advanced/file">Click here</a></center>
      </form>
 
 {% endblock %}

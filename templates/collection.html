@@ -15,9 +15,15 @@
                     {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         {% for message in messages %}
-                         <div class="alert alert-info" role="alert">
-                            {{ message }}
-                         </div>
+                            {% if '[ERROR]' in message %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                            {% else %}
+                            <div class="alert alert-info" role="alert">
+                                {{ message }}
+                            </div>
+                            {% endif %}
                         {% endfor %}
                     {% endif %}
                     {% endwith %}
@@ -48,7 +54,7 @@
                         <h2>
                             <span>Archives</span>
                             <button class="btn btn-info pull-right" data-toggle="modal" data-target="#modal-file">Add <span class="fa fa-plus"></span></button>
-                            <button id="btn-process" style="margin-right: 10px" class="btn btn-success pull-right" data-url="/collection/{{collection['id']}}/process">Save <span class="fa fa-save"></span> </button>
+                            <button id="btn-process" style="margin-right: 10px" class="btn btn-success pull-right" data-url="/collection/{{collection['id']}}/process">Process <span class="fa fa-save"></span> </button>
                         </h2>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
@@ -164,6 +170,10 @@
 
     $("#btn-process").click(function(e){
         e.preventDefault();
+
+        $(this).find('span').removeClass('fa fa-save');
+        $(this).find('span').addClass('fa fa-spinner fa-spin');
+
         url = $(this).data("url");
         $.ajax({
                 url: url,

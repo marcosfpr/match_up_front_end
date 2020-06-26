@@ -4,6 +4,7 @@
     <link href="../static/css/my_css/search.css" rel="stylesheet">
 {% endblock %}
 
+
 {% block body %}
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -21,7 +22,7 @@
     {% endif %}
     {% endwith %}
 
-     <form  id="search-form" action="/advanced/search" method="get">
+     <form enctype="multipart/form-data" role="form" id="search-form" action="/advanced/file" method="post">
         {% if not macro_collections() %}
         <div class="alert alert-info" role="alert">
             You don't have a collection to make queries. Create one <a href="/collection/register">here</a>.
@@ -58,8 +59,7 @@
                                 <div class="col-md-12">
                                     <div class="input-group" id="adv-search">
                                         <center class="center-text-search">
-                                            <input form="search-form" name="keywords" value="{{keywords}}" type="text" class="form-control input-text-search-advanced" placeholder="Search for snippets" />
-                                             Or search with a file <a href="/advanced/file">here</a>
+                                            Select a file: <input form="search-form" type="file" name="file"><br><br>
                                             <div style="margin-top: 20px;" class="form-group col-md-12">
                                                 <label style="color: #9C27B0;">ALGORITHM</label>
                                                 <select form="search-form" name="algorithm" class="form-control" id="algorithm-select">
@@ -150,7 +150,6 @@
 
 {% block footer %}
 <script type="text/javascript">
-
     $(document).ready(function() {
         if($('#algorithm-select').val() === 'Boolean' || $('#algorithm-select').val() === 'Probabilistic'){
             $("#weighting").hide();

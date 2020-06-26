@@ -28,4 +28,4 @@ def page_not_found(error):
 
 app.jinja_env.globals.update(macro_collections=macro_collections)
 
-app.run(debug=True)
+app.run(debug=False)

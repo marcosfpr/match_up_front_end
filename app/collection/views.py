@@ -35,7 +35,7 @@ def collection(collection_id):
         json = response.json()
 
         if 'error' in json:
-            flash(json['error'])
+            flash("[ERROR] " + json['error'])
         elif 'success' in json:
             flash(json['success'])
 
@@ -47,12 +47,12 @@ def collection(collection_id):
             response = requests.delete(BASE_API_URL + f"/collection/{collection_id}",
                                        headers=Token.get_header_access())
         except requests.exceptions.RequestException:
-            flash("Unexpected error")
+            flash("[ERROR] Unexpected error")
 
         if response:
             json = response.json()
             if 'error' in json:
-                flash(json['error'])
+                flash("[ERROR] " + json['error'])
             if 'success' in json:
                 flash(json['success'])
 
@@ -71,13 +71,13 @@ def upload_files(collection_id):
             response = requests.post(BASE_API_URL + f"/collection/{collection_id}/upload",
                                      headers=Token.get_header_access(), files=send_file)
         except requests.exceptions.RequestException:
-            flash("Unexpected error.")
+            flash("[ERROR] Unexpected error.")
             return redirect(url_for("collection.collection", collection_id=collection_id))
 
         json = response.json()
 
         if 'error' in json:
-            flash(json['error'])
+            flash("[ERROR] " + json['error'])
         elif 'success' in json:
             flash(json['success'])
 
@@ -93,7 +93,7 @@ def manage_collection_file(collection_id, filename):
             response = requests.get(BASE_API_URL+f"/collection/{collection_id}/{filename}",
                                     headers=Token.get_header_access())
         except requests.exceptions.RequestException:
-            flash("Unexpected error")
+            flash("[ERROR] Unexpected error")
 
         file_content = response.text if response else "Unexpected error"
         return render_template('file-show.html', filename=filename, filecontent=file_content)
@@ -102,16 +102,16 @@ def manage_collection_file(collection_id, filename):
         response = requests.delete(BASE_API_URL + f"/collection/{collection_id}/{filename}",
                                    headers=Token.get_header_access())
     except requests.exceptions.RequestException:
-        flash("Unexpected error")
+        flash("[ERROR] Unexpected error")
 
     if response:
         json = response.json()
         if 'error' in json:
-            flash(json['error'])
+            flash("[ERROR] " + json['error'])
         if 'success' in json:
             flash(json['success'])
 
-    return "finished process"  # preciso voltar algo
+    return "finished process"
 
 
 @bp.route("/collection/register", methods=['GET', 'POST'])
@@ -135,7 +135,7 @@ def register_collection():
     json = response.json()
 
     if 'error' in json:
-        flash(json['error'])
+        flash("[ERROR] " + json['error'])
         return redirect(request.url)
     elif 'success' in json:
         flash(json['success'])
@@ -144,17 +144,18 @@ def register_collection():
 
 
 @bp.route("/collection/<int:collection_id>/process", methods=['GET'])
+@Token.access_token_required
 def process_collection(collection_id):
     try:
         response = requests.get(BASE_API_URL+f"/collection/{collection_id}/process",
                                 headers=Token.get_header_access())
     except requests.exceptions.RequestException:
-        flash("Unexpected error")
+        flash("[ERROR] Unexpected error")
         return render_template("error.html")
 
     json = response.json()
     if 'error' in json:
-        flash(json['error'])
+        flash("[ERROR] " + json['error'])
     if 'success' in json:
         flash(json['success'])
 
